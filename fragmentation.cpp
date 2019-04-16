@@ -61,6 +61,8 @@ void fragmentation(int mtu) {
     struct Node* prev = NULL;
     struct Node* temp;
 
+    if(mtu % 8 != 0) mtu -= mtu % 8;
+
     do {
         if(ptr -> data > mtu) {
             int packet = ptr -> data;
