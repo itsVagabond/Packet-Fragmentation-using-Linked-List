@@ -11,6 +11,8 @@ struct Node* tail = NULL;
 struct Node* tempHead = NULL;
 struct Node* tempTail = NULL;
 
+int headerSize;
+
 void insert(int new_data, int flag) { 
     struct Node* new_node = (struct Node*) malloc(sizeof(struct Node));
 
@@ -42,13 +44,13 @@ void display(int flag) {
     if(flag){
         ptr = head;
         while (ptr != NULL) { 
-            cout << ptr -> data << " "; 
+            cout << ptr -> data + headerSize << " "; 
             ptr = ptr -> next; 
         }
     } else {
         ptr = tempHead;
         while (ptr != NULL) { 
-            cout << ptr -> data << " "; 
+            cout << ptr -> data + headerSize << " "; 
             ptr = ptr -> next; 
         } 
     }
@@ -106,6 +108,8 @@ int main() {
 
     cout << endl << "Enter No. of Routers : ";
     cin >> routers;
+    cout << endl << "Enter Adderes Size : ";
+    cin >> headerSize;
 
     int mtu[routers], temp, packet;
 
@@ -114,6 +118,8 @@ int main() {
     for(int i = 0; i < routers; i++) {
         cout << "Enter MTU for Router" << i+1 << " : ";
         cin >> mtu[i];
+
+        mtu[i] -= headerSize;
     }
 
     cout << endl << "Enter Packet Size : ";
